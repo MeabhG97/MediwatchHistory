@@ -32,13 +32,14 @@ class HistoryViewModel : ViewModel(){
 
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun getHistoryData(){
+        Log.d(TAG, "called getdata")
         viewModelScope.launch {
             uiState = HistoryUiState.Loading
             uiState = try {
                 val res = Api.retrofitService.getHistory()
                 Log.d(TAG, "Success")
                 HistoryUiState.Success(
-                    res
+                    res.toString()
                 )
 
             } catch (e: IOException){
