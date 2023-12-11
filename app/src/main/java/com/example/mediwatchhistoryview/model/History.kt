@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class History(
     @SerialName(value = "taken")
-    val taken: Boolean,
+    val taken: Boolean = true,
     @SerialName(value = "datetime")
-    val dateTime: String,
+    val dateTime: String =  "",
     @SerialName(value = "medications")
-    val medications: List<String>
+    val medications: List<String> = listOf()
 )

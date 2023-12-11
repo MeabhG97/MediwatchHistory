@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mediwatchhistoryview.model.History
 import com.example.mediwatchhistoryview.network.Api
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -16,14 +17,17 @@ import java.io.IOException
 const val TAG = "GetData"
 
 sealed interface HistoryUiState {
-    data class Success(val data: String) : HistoryUiState
+    data class Success(val data: List<History>) : HistoryUiState
     object Error : HistoryUiState
     object Loading : HistoryUiState
 }
 
+var detailEvent: History = History()
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
-class HistoryViewModel : ViewModel(){
-    var uiState : HistoryUiState by mutableStateOf(HistoryUiState.Loading)
+class HistoryViewModel : ViewModel() {
+
+
+    var uiState: HistoryUiState by mutableStateOf(HistoryUiState.Loading)
         private set
 
     init {
@@ -31,7 +35,7 @@ class HistoryViewModel : ViewModel(){
     }
 
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
-    fun getHistoryData(){
+    fun getHistoryData() {
         Log.d(TAG, "called getdata")
         viewModelScope.launch {
             uiState = HistoryUiState.Loading
@@ -39,16 +43,20 @@ class HistoryViewModel : ViewModel(){
                 val res = Api.retrofitService.getHistory()
                 Log.d(TAG, "Success")
                 HistoryUiState.Success(
-                    res.toString()
+                    res
                 )
 
-            } catch (e: IOException){
+            } catch (e: IOException) {
                 e.message?.let { Log.d(TAG, it) }
                 HistoryUiState.Error
-            } catch (e: HttpException){
+            } catch (e: HttpException) {
                 e.message?.let { Log.d(TAG, it) }
                 HistoryUiState.Error
             }
         }
+    }
+
+    fun setEvent(event: History) {
+        detailEvent = event
     }
 }
