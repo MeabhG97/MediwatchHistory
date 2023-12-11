@@ -12,6 +12,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -73,7 +74,8 @@ fun App(
 @Composable
 fun TopBar(scrollBehaviour : TopAppBarScrollBehavior, modifier: Modifier = Modifier){
     CenterAlignedTopAppBar(
-        title = { /*TODO*/ },
-        scrollBehavior = scrollBehaviour
+        title = {"Mediwatch History View"},
+        scrollBehavior = scrollBehaviour,
+        colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.)
     )
 }
