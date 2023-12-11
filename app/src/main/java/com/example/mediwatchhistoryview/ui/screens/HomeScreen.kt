@@ -102,6 +102,11 @@ fun ResultScreen(
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = MaterialTheme.colorScheme.tertiaryContainer
+            )
+            .padding(10.dp)
     ){
         items(entriesByDay){
             row ->
@@ -127,7 +132,7 @@ fun HistroyRow(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 5.dp, vertical = 2.dp)
+            .padding(vertical = 2.dp)
             .background(
                 color = MaterialTheme.colorScheme.secondaryContainer
             )

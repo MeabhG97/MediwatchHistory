@@ -69,7 +69,8 @@ fun App(
             }
             composable(route = HistoryScreens.Detailed.name){
                 DetailedScreen(
-                    event = detailEvent
+                    event = detailEvent,
+                    modifier = Modifier
                 )
             }
         }
