@@ -3,16 +3,18 @@ package com.example.mediwatchhistoryview.ui
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresExtension
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -40,7 +42,11 @@ fun App(
 ){
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehaviour.nestedScrollConnection),
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.tertiaryContainer
+            )
+            .nestedScroll(scrollBehaviour.nestedScrollConnection),
         topBar = { TopBar(scrollBehaviour = scrollBehaviour)}
     ) {
         val histroyViewModel : HistoryViewModel = viewModel()
@@ -74,8 +80,13 @@ fun App(
 @Composable
 fun TopBar(scrollBehaviour : TopAppBarScrollBehavior, modifier: Modifier = Modifier){
     CenterAlignedTopAppBar(
-        title = {"Mediwatch History View"},
+        title = {
+                Text(text = "Mediwatch History View")
+        },
         scrollBehavior = scrollBehaviour,
-        colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.)
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.primary
+        )
     )
 }
